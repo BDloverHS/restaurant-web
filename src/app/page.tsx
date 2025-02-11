@@ -1,5 +1,16 @@
+import RestaurantContainer from './restaurant/containers/RestaurantContainer'
+import { MainTitle } from './global/components/StyledTitle'
+import { MainContentBox } from './global/components/ContentBox'
+
 const MainPage = () => {
-  return <h1>메인페이지!!</h1>
+  return (
+    <>
+      <MainContentBox width={1000} height={750}>
+        <MainTitle>식당 검색</MainTitle>
+        <RestaurantContainer />
+      </MainContentBox>
+    </>
+  )
 }
 
 export default MainPage
