@@ -1,5 +1,4 @@
-'use client'
-
+'use server'
 import apiRequest from '@/app/global/libs/apiRequest'
 
 export const getCategories = async () => {
@@ -8,4 +7,6 @@ export const getCategories = async () => {
   if (res.status === 200) {
     return await res.json()
   }
+
+  return []
 }

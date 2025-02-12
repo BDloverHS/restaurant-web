@@ -9,7 +9,6 @@ import colors from '../../styles/colors'
 import sizes from '../../styles/sizes'
 import useUser from '../../hooks/useUser'
 import type { CommonType } from '../../types/StyledType'
-
 const { light } = colors
 const { big } = sizes
 
@@ -77,6 +76,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      {/* site-top */}
     </StyledHeader>
   )
 }
