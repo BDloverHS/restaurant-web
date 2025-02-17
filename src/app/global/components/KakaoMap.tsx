@@ -1,8 +1,7 @@
 'use client'
-
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { CommonType } from '../types/StyledType'
+import type { CommonType } from '../types/StyledType'
 
 const StyledMap = styled.div<CommonType>`
   height: 350px;
@@ -15,56 +14,56 @@ type Props = {
   pan?: any
 }
 
-const KakaoMap = ({center, locations, pan}:Props) => {
+const KakaoMap = ({ center, locations, pan }: Props) => {
   const mapRef = useRef<any>(undefined)
-  const mContainer = mapRef<any>(undefined)
+  const mContainer = useRef<any>(undefined)
+
+  useEffect(() => {
+    if (pan && pan.lat && pan.lon && mContainer && mContainer.current) {
+      const moveLatLng = new window.kakao.maps.LatLng(pan.lat, pan.lon)
+      mContainer.current.panTo(moveLatLng)
+    }
+  }, [pan, mContainer])
 
   useEffect(() => {
     if (mapRef) {
-      
+      const mapContainer = mapRef.current, // 지도를 표시할 div
         mapOption = {
-          center: new window.kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-          level: 5, // 지도의 확대 레벨
+          center: new window.kakao.maps.LatLng(center.lat, center.lon), // 지도의 중심좌표
+          level: 1, // 지도의 확대 레벨
         }
 
-      const map = new window.kakao.maps.Map(mapContainer, mapOption)
-      mapContainer.current
+      const map = new window.kakao.maps.Map(mapContainer, mapOption) // 지도를 생성합니다
+      mContainer.current = map
 
-      const locations = [
-        {
-          lat: 33.450701,
-          lng: 126.570667,
-          category: '한식',
-          name: '식당명',
-          address: '주소',
-        },
-      ]
-      for (const loc of locations)[] {
+      for (const loc of locations) {
+        const position = new window.kakao.maps.LatLng(loc.lat, loc.lon)
         const marker = new window.kakao.maps.Marker({
-          position: new window.kakao.maps.LatLng(loc.lat, loc.lng),
+          position,
         })
 
+        marker.setMap(map)
+
         const windowHTML = `<div class='info-window'>
-          <div class='row'>식당 종류 : ${loc.category}</div>
-          <div class='row'>식당 이름 : ${name}</div>
-          <div class='row'>식당 주소 : ${loc.address}</div>
+          <div class='row'>식당종류: ${loc.category}</div>
+          <div class='row'>식당이름: ${loc.name}</div>
+          <div class='row'>식당주소: ${loc.address}</div>
+          <span>[X]</span>
         </div>`
 
         const infoWindow = new window.kakao.maps.InfoWindow({
           position,
-          content: wiondowHTML,
+          content: windowHTML,
         })
 
-        window.kakao.maps.event.addListener(marker, click)
-
-        infoWindow.open(map, marker)
-
-        marker.setMap(map)
+        window.kakao.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open(map, marker)
+        })
       }
     }
-  }, [mapRef])
+  }, [mapRef, locations, center])
 
-  return <div ref={mapRef} style={{ height: 350 }}></div>
+  return <StyledMap ref={mapRef}></StyledMap>
 }
 
 export default React.memo(KakaoMap)

@@ -6,7 +6,7 @@ import type { CommonType } from '@/app/global/types/StyledType'
 import classNames from 'classnames'
 import colors from '@/app/global/styles/colors'
 import sizes from '@/app/global/styles/sizes'
-const { primary, info, white, light } = colors
+const { primary, white } = colors
 const { medium } = sizes
 
 const StyledNav = styled.nav<CommonType>`
@@ -16,8 +16,7 @@ const StyledNav = styled.nav<CommonType>`
 
   .tab {
     border: 1px solid ${primary};
-    color: ${white};
-    background: ${info};
+    color: ${primary};
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -26,7 +25,7 @@ const StyledNav = styled.nav<CommonType>`
 
     &.on {
       background: ${primary};
-      color: ${light};
+      color: ${white};
     }
   }
 

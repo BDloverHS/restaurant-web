@@ -4,7 +4,6 @@ import type { CommonType } from '@/app/global/types/StyledType'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import colors from '@/app/global/styles/colors'
 import sizes from '@/app/global/styles/sizes'
-
 const { info, dark, white, danger } = colors
 const { big, medium } = sizes
 
@@ -66,8 +65,8 @@ const RestaurantItems = ({ items, onClick }) => {
         {items.map((item) => (
           <ListItem
             key={'restaurant_' + item.seq}
-            onClick={onClick}
             item={item}
+            onClick={onClick}
           />
         ))}
       </StyledUl>

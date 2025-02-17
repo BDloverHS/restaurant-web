@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import StyledComponentsRegistry from './registry'
 import Header from './global/ui/outlines/Header'
 import Footer from './global/ui/outlines/Footer'
@@ -29,10 +30,9 @@ export default async function RootLayout({
     <html lang="ko">
       <head>
         <script
-          async
           type="text/javascript"
           src={
-            'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=' +
+            'https://dapi.kakao.com/v2/maps/sdk.js?appkey=' +
             process.env.NEXT_PUBLIC_KAKAO_KEY
           }
         />
