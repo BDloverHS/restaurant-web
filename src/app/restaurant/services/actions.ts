@@ -20,9 +20,11 @@ export const getList = async (search) => {
   if (mode == 'current') {
     // 위치 기반이라면 주변 식당이므로 sigugun 검색은 불필요
     delete search.sido
-    delete search.gigugun
+    delete search.sigungu
 
     apiUrl = process.env.RESTAURANT_URL + '/search'
+
+    if (!search.lat || !search.lon) return []
   }
 
   const qs = toQueryString(search)

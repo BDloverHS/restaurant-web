@@ -26,6 +26,7 @@ const RestaurantContainer = () => {
   const [categories, setCategories] = useState<string[]>([])
   const [items, setItems] = useState<any>([])
   const [loading, setLoading] = useState<boolean>(false)
+  // const [center, setCenter] = useState
 
   useEffect(() => {
     ;(async () => {
@@ -35,6 +36,7 @@ const RestaurantContainer = () => {
       setLoading(false)
     })()
   }, [search])
+
 
   useEffect(() => {
     setSearch((search) => ({ ...search, category: categories }))
@@ -96,7 +98,7 @@ const RestaurantContainer = () => {
         onSubmit={onSubmit}
         onClick={onClick}
       />
-      <KakaoMap />
+      <KakaoMap center={center} />
       {loading ? (
         <Loading />
       ) : (
